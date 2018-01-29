@@ -21,8 +21,7 @@
 
         - ovirt_cluster_facts:
             auth: "{{ ovirt_auth }}"
-            pattern:
-              name: '*'
+            pattern: name=*
         - debug:
             var: ovirt_clusters
 
