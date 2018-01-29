@@ -4,16 +4,12 @@
   tasks:
     - block:
 
-    # https://docs.ansible.com/ansible/latest/ovirt_auth_module.html
-
       - name: Obtain SSO token
         ovirt_auth:
           url: "{{ ovirt_url }}"
           username: "{{ ovirt_username }}"
           password: "{{ ovirt_password }}"
           insecure: true
-      
-      # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
 
       - name: Create shared disk
         ovirt_disks:
@@ -25,11 +21,6 @@
           state: detached
           storage_domain: "{{ storage_domain }}"
           wait: true
-      #   register: id
-
-      # - set_fact: disk_id="{{ id }}"
-
-      # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
       - name: Create first VM
         ovirt_vms:
@@ -51,7 +42,6 @@
       - name: Add shared disk
         ovirt_disks:
           auth: "{{ ovirt_auth }}"
-          # id: "{{ disk_id }}"
           name: "{{ prefix }}_shared_disk"
           interface: virtio
           state: attached
@@ -60,7 +50,6 @@
       - name: Add shared disk
         ovirt_disks:
           auth: "{{ ovirt_auth }}"
-          # id: "{{ disk_id }}"
           name: "{{ prefix }}_shared_disk"
           interface: virtio
           state: attached
