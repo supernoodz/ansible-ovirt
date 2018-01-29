@@ -17,7 +17,7 @@
         ovirt_disks:
           auth: "{{ ovirt_auth }}"
           name: shared_disk001
-          format: cow
+          format: raw
           # interface: virtio
           shareable: true
           size: 10GiB
