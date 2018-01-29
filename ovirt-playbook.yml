@@ -5,7 +5,7 @@
     - block:
         - name: Obtain SSO token with using username/password credentials
           ovirt_auth:
-            url: {{ ovirt_url }}
+            url: "{{ ovirt_url }}"
             username: {{ ovirt_username }}
             password: {{ ovirt_password }}
 
@@ -19,4 +19,3 @@
           ovirt_auth:
             state: absent
             ovirt_auth: "{{ ovirt_auth }}"
-            
