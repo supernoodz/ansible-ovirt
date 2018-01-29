@@ -22,59 +22,62 @@
       
       # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
 
-      # - name: Create shared disk
-      #   ovirt_disks:
-      #     auth: "{{ ovirt_auth }}"
-      #     name: shared_disk
-      #     format: raw
-      #     # interface: virtio
-      #     shareable: true
-      #     size: 10GiB
-      #     state: detached
-      #     storage_domain: "{{ storage_domain }}"
-      #     wait: true
+      - name: Create shared disk
+        ovirt_disks:
+          auth: "{{ ovirt_auth }}"
+          name: "{{ prefix }}_shared_disk"
+          format: raw
+          # interface: virtio
+          shareable: true
+          size: 10GiB
+          state: detached
+          storage_domain: "{{ storage_domain }}"
+          wait: true
       #   register: id
 
       # - set_fact: disk_id="{{ id }}"
 
       # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
-      # - name: Create first VM
-      #   ovirt_vms:
-      #     auth: "{{ ovirt_auth }}"
-      #     state: present
-      #     name: test001
-      #     template: "{{ vm_template }}"
-      #     cluster: "{{ cluster }}"
-      #     # storage_domain: "{{ storage_domain }}"
-      #     wait: true
+      - name: Create first VM
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          state: present
+          name: "{{ prefix }}_1"
+          template: "{{ vm_template }}"
+          cluster: "{{ cluster }}"
+          # storage_domain: "{{ storage_domain }}"
+          # wait: true
 
-      # - name: Add shared disk
-      #   ovirt_disks:
-      #     auth: "{{ ovirt_auth }}"
-      #     id: fbabafda-cf80-4c57-81a0-cb218df7d2ca
-      #     interface: virtio
-      #     state: attached
-      #     vm_id: 2a7d3a85-5804-4f39-8808-aa5c7b4ec256
-      #     wait: true
-
-      # - name: Create second VM
-      #   ovirt_vms:
-      #     auth: "{{ ovirt_auth }}"
-      #     state: present
-      #     name: test002
-      #     template: "{{ vm_template }}"
-      #     cluster: "{{ cluster }}"
-      #     # storage_domain: "{{ storage_domain }}"
+      - name: Create second VM
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          state: present
+          name: "{{ prefix }}_2"
+          template: "{{ vm_template }}"
+          cluster: "{{ cluster }}"
+          # storage_domain: "{{ storage_domain }}"
+          wait: true
 
       - name: Add shared disk
         ovirt_disks:
           auth: "{{ ovirt_auth }}"
-          id: fbabafda-cf80-4c57-81a0-cb218df7d2ca
+          # id: "{{ disk_id }}"
+          name: "{{ prefix }}_shared_disk"
           interface: virtio
           state: attached
-          vm_id: e0d761e0-a3c3-4d9d-ad0d-089010f43fd2
-          wait: true
+          vm_name: "{{ prefix }}_1"
+          # wait: true
+
+      - name: Add shared disk
+        ovirt_disks:
+          auth: "{{ ovirt_auth }}"
+          # id: "{{ disk_id }}"
+          name: "{{ prefix }}_shared_disk"
+          interface: virtio
+          state: attached
+          vm_name: "{{ prefix }}_2"
+          # wait: true
 
       always:
         - name: Revoke SSO token
