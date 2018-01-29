@@ -54,6 +54,7 @@
           auth: "{{ ovirt_auth }}"
           # id: "{{ id }}"
           name: test001
+          force: true
           disks:
             - name: shared_disk
           wait: true
