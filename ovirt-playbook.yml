@@ -6,8 +6,8 @@
         - name: Obtain SSO token with using username/password credentials
           ovirt_auth:
             url: "{{ ovirt_url }}"
-            username: {{ ovirt_username }}
-            password: {{ ovirt_password }}
+            username: "{{ ovirt_username }}"
+            password: "{{ ovirt_password }}"
 
         - ovirt_vms_facts:
             pattern: name=*
