@@ -23,12 +23,14 @@
 
         - name: Create VM
           ovirt_vms:
+            auth: "{{ ovirt_auth }}"
             state: present
             name: "{{ vm_name }}"
             template: "{{ vm_template }}"
 
         - name: Register VM
           ovirt_vms:
+            auth: "{{ ovirt_auth }}"
             state: registered
             storage_domain: "{{ storage_domain }}"
             cluster: "{{ cluster }}"
