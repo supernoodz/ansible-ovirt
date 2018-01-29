@@ -16,7 +16,7 @@
       - name: Create shared disk
         ovirt_disks:
           auth: "{{ ovirt_auth }}"
-          name: shared_disk001
+          name: shared_disk
           format: raw
           # interface: virtio
           shareable: true
@@ -24,6 +24,8 @@
           state: detached
           storage_domain: "{{ storage_domain }}"
           wait: true
+      - debug:
+          var: shared_disk
 
       # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
