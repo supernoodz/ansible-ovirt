@@ -13,19 +13,19 @@
             password: "{{ ovirt_password }}"
             insecure: true
 
-        - name: ovirt_vms_facts
-          ovirt_vms_facts:
-            auth: "{{ ovirt_auth }}"
-            pattern: name=Test-RHEL-1
-        - debug:
-            var: ovirt_vms
-
-        # - name: ovirt_cluster_facts
-        #   ovirt_cluster_facts:
+        # - name: ovirt_vms_facts
+        #   ovirt_vms_facts:
         #     auth: "{{ ovirt_auth }}"
-        #     pattern: name=*
+        #     pattern: name=Test-RHEL-1
         # - debug:
-        #     var: ovirt_clusters
+        #     var: ovirt_vms
+
+        - name: ovirt_clusters_facts
+          ovirt_clusters_facts:
+            auth: "{{ ovirt_auth }}"
+            pattern: name=*
+        - debug:
+            var: ovirt_clusters
 
         # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
