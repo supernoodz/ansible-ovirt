@@ -13,13 +13,15 @@
             password: "{{ ovirt_password }}"
             insecure: true
 
-        # - ovirt_vms_facts:
-        #     auth: "{{ ovirt_auth }}"
-        #     pattern: name=*
-        # - debug:
-        #     var: ovirt_vms
+        - name: ovirt_vms_facts
+          ovirt_vms_facts:
+            auth: "{{ ovirt_auth }}"
+            pattern: name=Test-RHEL-1
+        - debug:
+            var: ovirt_vms
 
-        - ovirt_cluster_facts:
+        - name: ovirt_cluster_facts
+          ovirt_cluster_facts:
             auth: "{{ ovirt_auth }}"
             pattern: name=*
         - debug:
