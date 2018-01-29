@@ -12,6 +12,8 @@
           username: "{{ ovirt_username }}"
           password: "{{ ovirt_password }}"
           insecure: true
+      
+      # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
 
       - name: Create shared disk
         ovirt_disks:
@@ -25,7 +27,7 @@
           storage_domain: "{{ storage_domain }}"
           wait: true
       - debug:
-          var: shared_disk
+          var: disk
 
       # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
