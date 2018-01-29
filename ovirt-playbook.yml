@@ -19,6 +19,13 @@
         # - debug:
         #     var: ovirt_vms
 
+        - ovirt_cluster_facts:
+            auth: "{{ ovirt_auth }}"
+            pattern:
+              name: '*'
+        - debug:
+            var: ovirt_clusters
+
         # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
         - name: Create VM
