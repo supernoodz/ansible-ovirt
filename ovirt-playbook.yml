@@ -61,8 +61,8 @@
       #     cluster: "{{ cluster }}"
       #     storage_domain: "{{ storage_domain }}"
 
-    always:
-      - name: Revoke SSO token
-        ovirt_auth:
-          state: absent
-          ovirt_auth: "{{ ovirt_auth }}"
+      always:
+        - name: Revoke SSO token
+          ovirt_auth:
+            state: absent
+            ovirt_auth: "{{ ovirt_auth }}"
