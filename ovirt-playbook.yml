@@ -13,12 +13,12 @@
           password: "{{ ovirt_password }}"
           insecure: true
 
-      - name: ovirt_vms_facts
-        ovirt_vms_facts:
-          auth: "{{ ovirt_auth }}"
-          pattern: name=test001
-      - debug:
-          var: ovirt_vms
+      # - name: ovirt_vms_facts
+      #   ovirt_vms_facts:
+      #     auth: "{{ ovirt_auth }}"
+      #     pattern: name=test001
+      # - debug:
+      #     var: ovirt_vms
       
       # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
 
@@ -55,7 +55,7 @@
           # id: "{{ id }}"
           name: test001
           disks:
-            - id: fbabafda-cf80-4c57-81a0-cb218df7d2ca
+            - name: shared_disk
           wait: true
 
       # - name: Create second VM
