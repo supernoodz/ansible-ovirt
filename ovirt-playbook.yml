@@ -49,14 +49,22 @@
       #     # storage_domain: "{{ storage_domain }}"
       #     wait: true
 
+      # - name: Add shared disk
+      #   ovirt_vms:
+      #     auth: "{{ ovirt_auth }}"
+      #     # id: "{{ id }}"
+      #     name: test001
+      #     force: true
+      #     disks:
+      #       - name: shared_disk
+      #     wait: true
+
       - name: Add shared disk
-        ovirt_vms:
+        ovirt_disks:
           auth: "{{ ovirt_auth }}"
-          # id: "{{ id }}"
-          name: test001
-          force: true
-          disks:
-            - name: shared_disk
+          id: fbabafda-cf80-4c57-81a0-cb218df7d2ca
+          state: attached
+          vm_id: 2a7d3a85-5804-4f39-8808-aa5c7b4ec256
           wait: true
 
       # - name: Create second VM
