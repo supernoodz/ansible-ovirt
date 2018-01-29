@@ -20,12 +20,12 @@
         - debug:
             var: ovirt_vms
 
-        - name: ovirt_cluster_facts
-          ovirt_cluster_facts:
-            auth: "{{ ovirt_auth }}"
-            pattern: name=*
-        - debug:
-            var: ovirt_clusters
+        # - name: ovirt_cluster_facts
+        #   ovirt_cluster_facts:
+        #     auth: "{{ ovirt_auth }}"
+        #     pattern: name=*
+        # - debug:
+        #     var: ovirt_clusters
 
         # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
