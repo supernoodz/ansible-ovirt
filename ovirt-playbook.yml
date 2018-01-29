@@ -27,23 +27,40 @@
         # - debug:
         #     var: ovirt_clusters
 
+        # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
+
+        # Create and attach new disk to VM
+        - name: Create shared disk
+          ovirt_disk:
+            auth: "{{ ovirt_auth }}"
+            name: shared_disk001
+            format: cow
+            # interface: virtio
+            shareable: true
+            size: 10GiB
+            state: detached
+            storage_domain: "{{ storage_domain }}"
+            wait: true
+
         # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
-        - name: Create VM
-          ovirt_vms:
-            auth: "{{ ovirt_auth }}"
-            state: present
-            name: "{{ vm_name }}"
-            template: "{{ vm_template }}"
-            cluster: "{{ cluster }}"
+        # - name: Create first VM
+        #   ovirt_vms:
+        #     auth: "{{ ovirt_auth }}"
+        #     state: present
+        #     name: test001
+        #     template: "{{ vm_template }}"
+        #     cluster: "{{ cluster }}"
+        #     storage_domain: "{{ storage_domain }}"
 
-        - name: Register VM
-          ovirt_vms:
-            auth: "{{ ovirt_auth }}"
-            state: registered
-            storage_domain: "{{ storage_domain }}"
-            cluster: "{{ cluster }}"
-            name: "{{ vm_name }}"
+        # - name: Create second VM
+        #   ovirt_vms:
+        #     auth: "{{ ovirt_auth }}"
+        #     state: present
+        #     name: test002
+        #     template: "{{ vm_template }}"
+        #     cluster: "{{ cluster }}"
+        #     storage_domain: "{{ storage_domain }}"
 
       always:
         - name: Revoke SSO token
