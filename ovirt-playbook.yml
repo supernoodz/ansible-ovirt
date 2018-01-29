@@ -50,14 +50,22 @@
       #     wait: true
 
       # - name: Add shared disk
-      #   ovirt_vms:
+      #   ovirt_disks:
       #     auth: "{{ ovirt_auth }}"
-      #     # id: "{{ id }}"
-      #     name: test001
-      #     force: true
-      #     disks:
-      #       - name: shared_disk
+      #     id: fbabafda-cf80-4c57-81a0-cb218df7d2ca
+      #     interface: virtio
+      #     state: attached
+      #     vm_id: 2a7d3a85-5804-4f39-8808-aa5c7b4ec256
       #     wait: true
+
+      - name: Create second VM
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          state: present
+          name: test002
+          template: "{{ vm_template }}"
+          cluster: "{{ cluster }}"
+          # storage_domain: "{{ storage_domain }}"
 
       - name: Add shared disk
         ovirt_disks:
@@ -67,15 +75,6 @@
           state: attached
           vm_id: 2a7d3a85-5804-4f39-8808-aa5c7b4ec256
           wait: true
-
-      # - name: Create second VM
-      #   ovirt_vms:
-      #     auth: "{{ ovirt_auth }}"
-      #     state: present
-      #     name: test002
-      #     template: "{{ vm_template }}"
-      #     cluster: "{{ cluster }}"
-      #     storage_domain: "{{ storage_domain }}"
 
       always:
         - name: Revoke SSO token
