@@ -13,8 +13,24 @@
           password: "{{ ovirt_password }}"
           insecure: true
 
+      # - name: ovirt_vms_facts
+      #   ovirt_vms_facts:
+      #     auth: "{{ ovirt_auth }}"
+      #     pattern: name=Test-RHEL-1
+      # - debug:
+      #     var: ovirt_vms
+
+      # - name: ovirt_clusters_facts
+      #   ovirt_clusters_facts:
+      #     auth: "{{ ovirt_auth }}"
+      #     pattern: name=*
+      # - debug:
+      #     var: ovirt_clusters
+
+      # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
+
       - name: Create shared disk
-        ovirt_disks:
+        ovirt_disk:
           auth: "{{ ovirt_auth }}"
           name: shared_disk001
           format: cow
