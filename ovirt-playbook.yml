@@ -15,39 +15,40 @@
       
       # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
 
-      - name: Create shared disk
-        ovirt_disks:
-          auth: "{{ ovirt_auth }}"
-          name: shared_disk
-          format: raw
-          # interface: virtio
-          shareable: true
-          size: 10GiB
-          state: detached
-          storage_domain: "{{ storage_domain }}"
-          wait: true
-        register: id
+      # - name: Create shared disk
+      #   ovirt_disks:
+      #     auth: "{{ ovirt_auth }}"
+      #     name: shared_disk
+      #     format: raw
+      #     # interface: virtio
+      #     shareable: true
+      #     size: 10GiB
+      #     state: detached
+      #     storage_domain: "{{ storage_domain }}"
+      #     wait: true
+      #   register: id
 
-      - set_fact: disk_id="{{ id }}"
+      # - set_fact: disk_id="{{ id }}"
 
       # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
-      - name: Create first VM
-        ovirt_vms:
-          auth: "{{ ovirt_auth }}"
-          state: present
-          name: test001
-          template: "{{ vm_template }}"
-          cluster: "{{ cluster }}"
-          # storage_domain: "{{ storage_domain }}"
-          wait: true
+      # - name: Create first VM
+      #   ovirt_vms:
+      #     auth: "{{ ovirt_auth }}"
+      #     state: present
+      #     name: test001
+      #     template: "{{ vm_template }}"
+      #     cluster: "{{ cluster }}"
+      #     # storage_domain: "{{ storage_domain }}"
+      #     wait: true
 
       - name: Add shared disk
         ovirt_vms:
           auth: "{{ ovirt_auth }}"
-          id: "{{ id }}"
+          # id: "{{ id }}"
+          name: test001
           disks:
-            - id: "{{ disk_id }}"
+            - id: fbabafda-cf80-4c57-81a0-cb218df7d2ca
           wait: true
 
       # - name: Create second VM
