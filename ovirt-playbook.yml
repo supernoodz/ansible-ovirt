@@ -39,7 +39,7 @@
           name: test001
           template: "{{ vm_template }}"
           cluster: "{{ cluster }}"
-          storage_domain: "{{ storage_domain }}"
+          # storage_domain: "{{ storage_domain }}"
           wait: true
 
       - name: Add shared disk
