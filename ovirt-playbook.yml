@@ -21,14 +21,14 @@
 
         # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
-        # Creates a new Virtual Machine from template named 'rhel7_template'
-        ovirt_vms:
+        - name: Create VM
+          ovirt_vms:
             state: present
             name: "{{ vm_name }}"
             template: "{{ vm_template }}"
 
-        # Register VM
-        ovirt_vms:
+        - name: Register VM
+          ovirt_vms:
             state: registered
             storage_domain: "{{ storage_domain }}"
             cluster: "{{ cluster }}"
