@@ -26,6 +26,7 @@
           state: detached
           storage_domain: "{{ storage_domain }}"
           wait: true
+        register: id
 
       - set_fact: disk_id="{{ id }}"
 
