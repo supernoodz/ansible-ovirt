@@ -13,26 +13,26 @@
             password: "{{ ovirt_password }}"
             insecure: true
 
-        - ovirt_vms_facts:
-            auth: "{{ ovirt_auth }}"
-            pattern: name=*
-        - debug:
-            var: ovirt_vms
+        # - ovirt_vms_facts:
+        #     auth: "{{ ovirt_auth }}"
+        #     pattern: name=*
+        # - debug:
+        #     var: ovirt_vms
 
-        # # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
+        # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
-        # # Creates a new Virtual Machine from template named 'rhel7_template'
-        # ovirt_vms:
-        #     state: present
-        #     name: "{{ vm_name }}"
-        #     template: "{{ vm_template }}"
+        # Creates a new Virtual Machine from template named 'rhel7_template'
+        ovirt_vms:
+            state: present
+            name: "{{ vm_name }}"
+            template: "{{ vm_template }}"
 
-        # # Register VM
-        # ovirt_vms:
-        #     state: registered
-        #     storage_domain: "{{ storage_domain }}"
-        #     cluster: "{{ cluster }}"
-        #     name: "{{ vm_name }}"
+        # Register VM
+        ovirt_vms:
+            state: registered
+            storage_domain: "{{ storage_domain }}"
+            cluster: "{{ cluster }}"
+            name: "{{ vm_name }}"
 
       always:
         - name: Revoke SSO token
