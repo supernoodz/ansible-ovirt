@@ -3,16 +3,35 @@
 
   tasks:
     - block:
+
+    # https://docs.ansible.com/ansible/latest/ovirt_auth_module.html
+
         - name: Obtain SSO token with using username/password credentials
           ovirt_auth:
             url: "{{ ovirt_url }}"
             username: "{{ ovirt_username }}"
             password: "{{ ovirt_password }}"
+            insecure: true
 
         - ovirt_vms_facts:
             pattern: name=*
         - debug:
             var: ovirt_vms
+
+        # # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
+
+        # # Creates a new Virtual Machine from template named 'rhel7_template'
+        # ovirt_vms:
+        #     state: present
+        #     name: "{{ vm_name }}"
+        #     template: "{{ vm_template }}"
+
+        # # Register VM
+        # ovirt_vms:
+        #     state: registered
+        #     storage_domain: "{{ storage_domain }}"
+        #     cluster: "{{ cluster }}"
+        #     name: "{{ vm_name }}"
 
       always:
         - name: Always revoke the SSO token
