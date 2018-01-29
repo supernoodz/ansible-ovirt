@@ -26,19 +26,28 @@
           state: detached
           storage_domain: "{{ storage_domain }}"
           wait: true
-      - debug:
-          var: disk
+
+      - set_fact: disk_id="{{ id }}"
 
       # https://docs.ansible.com/ansible/latest/ovirt_vms_module.html
 
-      # - name: Create first VM
-      #   ovirt_vms:
-      #     auth: "{{ ovirt_auth }}"
-      #     state: present
-      #     name: test001
-      #     template: "{{ vm_template }}"
-      #     cluster: "{{ cluster }}"
-      #     storage_domain: "{{ storage_domain }}"
+      - name: Create first VM
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          state: present
+          name: test001
+          template: "{{ vm_template }}"
+          cluster: "{{ cluster }}"
+          storage_domain: "{{ storage_domain }}"
+          wait: true
+
+      - name: Add shared disk
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          id: "{{ id }}"
+          disks:
+            - id: "{{ disk_id }}"
+          wait: true
 
       # - name: Create second VM
       #   ovirt_vms:
