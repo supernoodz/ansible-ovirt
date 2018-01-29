@@ -12,6 +12,13 @@
           username: "{{ ovirt_username }}"
           password: "{{ ovirt_password }}"
           insecure: true
+
+      - name: ovirt_vms_facts
+        ovirt_vms_facts:
+          auth: "{{ ovirt_auth }}"
+          pattern: name=test001
+      - debug:
+          var: ovirt_vms
       
       # https://docs.ansible.com/ansible/latest/ovirt_disk_module.html
 
